@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADC Risk Horizon | Business Consulting Solutions for Growth</title>
+  <meta name="description" content="Expert consulting for business growth through strategic planning, AI expertise, and effective risk management." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">
+        <span class="nav__logo-adc">ADC</span> Risk Horizon
+      </a>
+      <ul class="nav__links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#appointments">Appointments</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#appointments">Appointments</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Enterprise Performance Solutions</p>
+      <h1 class="hero__title">Business Consulting<br/><em>Solutions for Growth</em></h1>
+      <p class="hero__sub">Explore enterprise performance solutions that leverage AI expertise to enhance your business outcomes. Expert consulting for business growth through strategic planning and effective risk management.</p>
+      <div class="hero__cta">
+        <a href="#appointments" class="btn btn--primary">Get Started Today</a>
+        <a href="#services" class="btn btn--ghost">Our Services</a>
+      </div>
+    </div>
+    <div class="hero__logo-card">
+      <div class="hero__logo-inner">
+        <div class="hero__logo-mark">
+          <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="55" rx="90" ry="18" fill="none" stroke="#1a3a5c" stroke-width="3"/>
+            <ellipse cx="100" cy="48" rx="70" ry="14" fill="none" stroke="#1a3a5c" stroke-width="2"/>
+            <circle cx="100" cy="28" r="22" fill="#f4a829"/>
+            <ellipse cx="100" cy="50" rx="85" ry="10" fill="#1a3a5c" opacity="0.15"/>
+          </svg>
+        </div>
+        <p class="hero__logo-text">ADC RISK HORIZON</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">What We Do</p>
+        <h2>Business Consulting Services</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__num">01</div>
+          <h3>Financial Planning Consulting</h3>
+          <p>We help develop effective budgeting, forecasting, and financial planning strategies. We work with you to create a tailored financial plan that helps you achieve your business goals.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__num">02</div>
+          <h3>Organizational Development</h3>
+          <p>Our Organizational Development Consulting services help improve organizational culture and structure. We identify areas of improvement, develop a customized plan, and implement change to optimize your business.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__num">03</div>
+          <h3>Technology Consulting</h3>
+          <p>We help leverage the latest technology solutions to improve operations and increase revenue. We identify technology solutions that fit your business needs and help you stay ahead of the competition.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__num">04</div>
+          <h3>Marketing Consulting</h3>
+          <p>Strategic marketing solutions designed to amplify your brand, reach your target audience, and drive measurable business growth through data-driven campaigns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / EXPERT SOLUTIONS -->
+  <section class="about" id="about">
+    <div class="container about__inner">
+      <div class="about__image">
+        <div class="about__image-frame">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="ADC Risk Horizon team consulting" />
+        </div>
+      </div>
+      <div class="about__content">
+        <p class="section-eyebrow">Our Approach</p>
+        <h2>Expert Consulting Solutions</h2>
+        <div class="section-rule section-rule--left"></div>
+        <h3>Strategic Business Planning</h3>
+        <p>Our team offers expert consulting for business growth through comprehensive strategic business planning services designed to help your organization achieve its long-term goals.</p>
+        <p>Leveraging our AI expertise, we analyze market trends and develop tailored enterprise performance solutions that drive growth and enhance competitiveness while ensuring effective risk management.</p>
+        <div class="about__chart">
+          <p class="about__chart-label">Portfolio Loss Distribution (Billions) — 20k Paths</p>
+          <canvas id="lossChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPOINTMENTS -->
+  <section class="appointments" id="appointments">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Work With Us</p>
+        <h2>Online Appointments</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="appointments__grid">
+        <div class="appt-card">
+          <div class="appt-card__image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80" alt="Business Strategy Session" />
+          </div>
+          <div class="appt-card__body">
+            <h3>Business Strategy Session</h3>
+            <div class="appt-card__meta">
+              <span>2 hrs</span>
+              <span class="appt-card__dot">·</span>
+              <span>$300</span>
+            </div>
+            <p>A focused deep-dive into your business challenges, opportunities, and strategic direction. Walk away with a clear action plan.</p>
+            <!-- Replace with your Calendly link -->
+            <a href="https://calendly.com" target="_blank" class="btn btn--primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="reviews__bg">
+      <div class="container">
+        <div class="section-header section-header--light">
+          <p class="section-eyebrow section-eyebrow--light">Testimonials</p>
+          <h2>Our Clients Speak for Us</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="reviews__placeholder">
+          <p>Reviews coming soon!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="blog" id="blog">
+    <div class="blog__bg">
+      <div class="container">
+        <div class="section-header section-header--light">
+          <p class="section-eyebrow section-eyebrow--light">Insights</p>
+          <h2>Blog</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="blog__grid">
+          <article class="blog-card">
+            <a href="blog/from-zero-to-production.html">
+              <div class="blog-card__image blog-card__image--dark"></div>
+              <div class="blog-card__body">
+                <p class="blog-card__date">June 4, 2026</p>
+                <h3>From Zero to Production in 48 Hours</h3>
+                <span class="blog-card__read">Continue Reading →</span>
+              </div>
+            </a>
+          </article>
+          <article class="blog-card">
+            <a href="blog/when-technology-gets-in-the-way.html">
+              <div class="blog-card__image blog-card__image--mid"></div>
+              <div class="blog-card__body">
+                <p class="blog-card__date">June 3, 2026</p>
+                <h3>Chapter: When Technology Gets in the Way</h3>
+                <span class="blog-card__read">Continue Reading →</span>
+              </div>
+            </a>
+          </article>
+          <article class="blog-card">
+            <a href="blog/what-do-you-do-with-your-life.html">
+              <div class="blog-card__image blog-card__image--light"></div>
+              <div class="blog-card__body">
+                <p class="blog-card__date">June 3, 2026</p>
+                <h3>What Do You Do With Your Life?</h3>
+                <span class="blog-card__read">Continue Reading →</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section class="subscribe">
+    <div class="container subscribe__inner">
+      <div class="subscribe__text">
+        <h2>Stay in the Loop</h2>
+        <p>Get 10% off your first consultation when you sign up for our newsletter.</p>
+      </div>
+      <div class="subscribe__form">
+        <!-- Replace with your Mailchimp embed form action URL -->
+        <form action="#" method="post" id="subscribeForm">
+          <input type="email" name="EMAIL" placeholder="Your email address" required />
+          <button type="submit" class="btn btn--primary">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container contact__inner">
+      <div class="contact__text">
+        <p class="section-eyebrow">Get In Touch</p>
+        <h2>Contact Us</h2>
+        <div class="section-rule section-rule--left"></div>
+        <h3>Better yet, see us in person!</h3>
+        <p>We love our customers and are dedicated to providing expert consulting for business growth, including insights into AI expertise. Feel free to reach out during normal business hours.</p>
+        <div class="contact__details">
+          <p><strong>ADC Risk Horizon</strong></p>
+          <p><a href="mailto:adcohen@adcriskhorizon.com">adcohen@adcriskhorizon.com</a></p>
+          <p><a href="tel:+16175819236">+1 (617) 581-9236</a></p>
+        </div>
+        <a href="mailto:adcohen@adcriskhorizon.com" class="btn btn--primary">Drop Us a Line</a>
+      </div>
+      <div class="contact__chart">
+        <p class="contact__chart-label">Portfolio Loss Distribution (Billions) — 20k Paths</p>
+        <canvas id="contactChart" width="420" height="260"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__brand"><span>ADC</span> Risk Horizon</p>
+      <nav class="footer__nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#appointments">Appointments</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 ADC Risk Horizon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

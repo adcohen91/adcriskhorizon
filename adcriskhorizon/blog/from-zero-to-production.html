@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From Zero to Production in 48 Hours | ADC Risk Horizon Blog</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/blog.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo"><span class="nav__logo-adc">ADC</span> Risk Horizon</a>
+      <ul class="nav__links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#appointments">Appointments</a></li>
+        <li><a href="/#blog">Blog</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <article class="blog-post">
+    <div class="blog-post__header">
+      <div class="container">
+        <p class="blog-post__date">June 4, 2026</p>
+        <h1>From Zero to Production in 48 Hours</h1>
+        <p class="blog-post__sub">How I built and deployed a production-grade AI avatar application from a brand new MacBook.</p>
+      </div>
+    </div>
+    <div class="blog-post__body container">
+      <p>The moment came for me at the end of two of the most intense, productive, and frankly exhilarating days I've had in a long time — sitting in front of a live, load-balanced, globally replicated, production-grade AI avatar application that I had taken from concept to deployment entirely on my own, starting with nothing but a brand new MacBook still in its box.</p>
+      <p><em>Let me walk you through what actually happened.</em></p>
+
+      <h2>Day One: The MacBook Unboxing and the Development Gauntlet</h2>
+      <p>Every project has a ground zero. Mine was a factory-fresh Apple MacBook with nothing on it — no tools, no environments, no credentials configured, no repositories cloned. Just a clean slate and a clear goal.</p>
+      <p>The first order of business was turning this clean machine into a capable development workstation. That meant installing and configuring a full toolchain from scratch:</p>
+      <ul>
+        <li><strong>Homebrew</strong> — the package manager that makes macOS development possible</li>
+        <li><strong>Git</strong> — with SSH keys generated, configured, and registered with source control</li>
+        <li><strong>Python</strong> — the correct version, via pyenv to manage versioning cleanly</li>
+        <li><strong>Node.js and npm</strong> — for front-end dependencies</li>
+        <li><strong>Docker Desktop</strong> — which would be critical later for containerizing the application</li>
+        <li><strong>AWS CLI</strong> — configured with credentials, region, and output format</li>
+      </ul>
+      <p>None of this is glamorous, but every step matters. A misconfigured environment is a production incident waiting to happen.</p>
+
+      <h2>Building the Application</h2>
+      <p>With the environment solid, I moved into the application itself. The core challenge was interesting: build an AI avatar that could hold realistic, low-latency conversations — the kind of experience where the delay feels natural, not mechanical.</p>
+      <p>The architecture I landed on was clean and composable. A Python backend handling the AI inference and session management, a lightweight frontend for the conversational interface, and a container layer that would make deployment portable and repeatable.</p>
+
+      <h2>Day Two: From Local to Live</h2>
+      <p>Day two was about infrastructure. Getting something running locally is one thing. Getting it running reliably at scale, behind a proper domain, with SSL, auto-scaling, and zero-downtime deployments — that's the real work.</p>
+      <p>I chose AWS App Runner for the compute layer. The decision was deliberate: App Runner abstracts away the cluster management of ECS/EKS while still giving you container-native deployment, automatic scaling, and built-in health checks. For a solo deployment moving fast, it was exactly the right tool.</p>
+      <p>The deployment pipeline came together in stages — container built and pushed to ECR, App Runner service created and pointed at the image, custom domain configured with Route 53, SSL certificate provisioned through ACM. Each step validated before moving to the next.</p>
+
+      <h2>What I Learned</h2>
+      <p>Forty-eight hours is not a lot of time. But it's enough — if you're deliberate about sequencing, if you don't let perfect be the enemy of shipped, and if you have a clear picture of what "done" actually means before you start.</p>
+      <p>The stack is live. The avatar works. And I'm already thinking about what comes next.</p>
+
+      <div class="blog-post__back">
+        <a href="/#blog" class="btn btn--primary">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__brand"><span>ADC</span> Risk Horizon</p>
+      <p class="footer__copy">&copy; 2026 ADC Risk Horizon. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

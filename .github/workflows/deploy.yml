@@ -21,25 +21,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region:            us-east-1
 
-      - name: Sync files to S3
+      - name: Sync HTML files to S3
         run: |
           aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} \
-            --exclude ".git/*" \
-            --exclude ".github/*" \
-            --exclude "README.md" \
-            --delete \
-            --cache-control "max-age=86400"
+            --exclude "*" \
+            --include "*.html" \
+            --content-type "text/html" \
+            --cache-control "max-age=86400" \
+            --delete
 
-      - name: Set longer cache for assets
+      - name: Sync CSS files to S3
         run: |
-          aws s3 cp s3://${{ secrets.S3_BUCKET_NAME }}/css/ s3://${{ secrets.S3_BUCKET_NAME }}/css/ \
-            --recursive \
-            --metadata-directive REPLACE \
+          aws s3 sync css/ s3://${{ secrets.S3_BUCKET_NAME }}/css/ \
+            --content-type "text/css" \
             --cache-control "max-age=2592000"
-          aws s3 cp s3://${{ secrets.S3_BUCKET_NAME }}/js/ s3://${{ secrets.S3_BUCKET_NAME }}/js/ \
-            --recursive \
-            --metadata-directive REPLACE \
+
+      - name: Sync JS files to S3
+        run: |
+          aws s3 sync js/ s3://${{ secrets.S3_BUCKET_NAME }}/js/ \
+            --content-type "application/javascript" \
             --cache-control "max-age=2592000"
+
+      - name: Sync blog HTML files to S3
+        run: |
+          aws s3 sync blog/ s3://${{ secrets.S3_BUCKET_NAME }}/blog/ \
+            --content-type "text/html" \
+            --cache-control "max-age=86400"
 
       - name: Invalidate CloudFront cache
         env:

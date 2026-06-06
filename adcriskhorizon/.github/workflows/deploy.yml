@@ -42,11 +42,16 @@ jobs:
             --cache-control "max-age=2592000"
 
       - name: Invalidate CloudFront cache
-        if: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID != 'PENDING' }}
+        env:
+          CF_DIST_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
+          if [ "$CF_DIST_ID" != "PENDING" ] && [ -n "$CF_DIST_ID" ]; then
+            aws cloudfront create-invalidation \
+              --distribution-id "$CF_DIST_ID" \
+              --paths "/*"
+          else
+            echo "CloudFront not yet configured, skipping invalidation"
+          fi
 
       - name: Deployment complete
         run: echo "✅ adcriskhorizon.com deployed successfully"

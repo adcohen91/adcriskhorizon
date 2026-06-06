@@ -4,22 +4,42 @@
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
-
-// Close mobile menu on link click
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+}
 
 // ── Scroll-based nav shadow ─────────────────
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('nav');
-  nav.style.boxShadow = window.scrollY > 40
-    ? '0 4px 24px rgba(0,0,0,0.25)'
-    : 'none';
+  if (nav) {
+    nav.style.boxShadow = window.scrollY > 40
+      ? '0 4px 24px rgba(0,0,0,0.25)'
+      : 'none';
+  }
 });
+
+// ── Blog Carousel ────────────────────────────
+const carousel = document.getElementById('blogCarousel');
+const prevBtn  = document.querySelector('.blog__prev');
+const nextBtn  = document.querySelector('.blog__next');
+
+if (carousel && prevBtn && nextBtn) {
+  const scrollAmount = () => {
+    const card = carousel.querySelector('.blog-card');
+    return card ? card.offsetWidth + 16 : 256;
+  };
+  prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+  });
+  nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+  });
+}
 
 // ── Portfolio Loss Distribution Chart ───────
 function drawLossChart(canvasId, width, height) {
@@ -27,13 +47,12 @@ function drawLossChart(canvasId, width, height) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  canvas.width  = width  || canvas.offsetWidth || 400;
-  canvas.height = height || 200;
+  canvas.width  = width  || canvas.offsetWidth || 420;
+  canvas.height = height || 280;
 
   const W = canvas.width;
   const H = canvas.height;
 
-  // Generate normal-ish distribution data (20k paths simulation)
   const mean  = 0.045;
   const sigma = 0.008;
   const bins  = 60;
@@ -41,7 +60,6 @@ function drawLossChart(canvasId, width, height) {
   const maxX  = 0.085;
   const step  = (maxX - minX) / bins;
 
-  // Gaussian PDF
   function gauss(x) {
     return Math.exp(-0.5 * Math.pow((x - mean) / sigma, 2)) / (sigma * Math.sqrt(2 * Math.PI));
   }
@@ -50,19 +68,16 @@ function drawLossChart(canvasId, width, height) {
   let maxVal = 0;
   for (let i = 0; i < bins; i++) {
     const x = minX + i * step + step / 2;
-    const y = gauss(x) * step * 20000; // scale to count
+    const y = gauss(x) * step * 20000;
     data.push({ x, y });
     if (y > maxVal) maxVal = y;
   }
 
-  // Layout
-  const pad = { top: 20, right: 20, bottom: 36, left: 52 };
+  const pad = { top: 20, right: 20, bottom: 40, left: 52 };
   const plotW = W - pad.left - pad.right;
   const plotH = H - pad.top  - pad.bottom;
 
   ctx.clearRect(0, 0, W, H);
-
-  // Background
   ctx.fillStyle = '#f5f7fa';
   ctx.fillRect(0, 0, W, H);
 
@@ -88,7 +103,6 @@ function drawLossChart(canvasId, width, height) {
     const bx = pad.left + i * barW;
     const bh = (d.y / maxVal) * plotH;
     const by = pad.top + plotH - bh;
-
     ctx.fillStyle = '#1a3a5c';
     ctx.globalAlpha = 0.85;
     ctx.fillRect(bx + 1, by, barW - 2, bh);
@@ -96,14 +110,13 @@ function drawLossChart(canvasId, width, height) {
   ctx.globalAlpha = 1;
 
   // VaR lines
-  const var99_5 = 0.063;
-  const var99_9 = 0.068;
+  const var99_5 = 0.068;
+  const var99_9 = 0.078;
 
   function xToCanvas(xVal) {
     return pad.left + ((xVal - minX) / (maxX - minX)) * plotW;
   }
 
-  // VaR 99.5%
   ctx.strokeStyle = '#f4a829';
   ctx.lineWidth = 2;
   ctx.setLineDash([5, 4]);
@@ -112,7 +125,6 @@ function drawLossChart(canvasId, width, height) {
   ctx.lineTo(xToCanvas(var99_5), pad.top + plotH);
   ctx.stroke();
 
-  // VaR 99.9%
   ctx.strokeStyle = '#e05c3a';
   ctx.beginPath();
   ctx.moveTo(xToCanvas(var99_9), pad.top);
@@ -129,14 +141,13 @@ function drawLossChart(canvasId, width, height) {
     ctx.fillText(val.toFixed(2), x, pad.top + plotH + 16);
   });
 
-  // X-axis label
   ctx.fillStyle = '#5b7a99';
   ctx.font = '11px DM Sans, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('Loss (USD billions)', pad.left + plotW / 2, H - 4);
+  ctx.fillText('Loss (USD billions)', pad.left + plotW / 2, H - 6);
 
   // Legend
-  const legendX = W - pad.right - 140;
+  const legendX = W - pad.right - 145;
   const legendY = pad.top + 8;
   ctx.font = '10px DM Sans, sans-serif';
   ctx.textAlign = 'left';
@@ -150,7 +161,7 @@ function drawLossChart(canvasId, width, height) {
   ctx.stroke();
   ctx.setLineDash([]);
   ctx.fillStyle = '#5b7a99';
-  ctx.fillText('VaR99.9%=0.07B', legendX + 22, legendY + 9);
+  ctx.fillText('VaR99.9%=0.078', legendX + 22, legendY + 9);
 
   ctx.strokeStyle = '#f4a829';
   ctx.lineWidth = 2;
@@ -161,36 +172,69 @@ function drawLossChart(canvasId, width, height) {
   ctx.stroke();
   ctx.setLineDash([]);
   ctx.fillStyle = '#5b7a99';
-  ctx.fillText('VaR99.5%=0.06B', legendX + 22, legendY + 24);
+  ctx.fillText('VaR99.5%=0.068', legendX + 22, legendY + 24);
 }
 
-// Draw charts after fonts load
 document.fonts.ready.then(() => {
-  drawLossChart('lossChart',    400, 200);
-  drawLossChart('contactChart', 420, 260);
+  drawLossChart('contactChart', 420, 280);
 });
 
 // ── Scroll reveal ────────────────────────────
-const observer = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.style.opacity    = '1';
-      entry.target.style.transform  = 'translateY(0)';
+      entry.target.style.opacity   = '1';
+      entry.target.style.transform = 'translateY(0)';
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 
-document.querySelectorAll('.service-card, .appt-card, .blog-card').forEach(el => {
-  el.style.opacity   = '0';
-  el.style.transform = 'translateY(24px)';
+document.querySelectorAll('.service-item, .appt-card, .blog-card').forEach(el => {
+  el.style.opacity    = '0';
+  el.style.transform  = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  observer.observe(el);
+  revealObserver.observe(el);
 });
 
-// ── Subscribe form placeholder ───────────────
-document.getElementById('subscribeForm')?.addEventListener('submit', (e) => {
+// ── Forms → Lambda ───────────────────────────
+const LAMBDA_URL = 'https://spwzewztbyumsxpz7hxyzqqhbe0tqozc.lambda-url.us-east-1.on.aws/';
+
+async function postForm(form) {
+  const data = new URLSearchParams(new FormData(form)).toString();
+  const res  = await fetch(LAMBDA_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: data
+  });
+  return res.ok;
+}
+
+document.getElementById('subscribeForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
-  // TODO: Replace with Mailchimp form action URL
-  alert('Thank you for subscribing! We\'ll be in touch.');
-  e.target.reset();
+  const note = document.getElementById('subscribeNote');
+  try {
+    const ok = await postForm(e.target);
+    note.textContent = ok ? 'Thanks for subscribing! We\'ll be in touch.' : 'Something went wrong — please try again.';
+    note.style.color = ok ? 'green' : 'red';
+    if (ok) e.target.reset();
+  } catch {
+    note.textContent = 'Something went wrong — please try again.';
+    note.style.color = 'red';
+  }
+});
+
+document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('contactMsg');
+  msg.textContent = 'Sending…';
+  msg.style.color = 'inherit';
+  try {
+    const ok = await postForm(e.target);
+    msg.textContent = ok ? 'Message sent! We\'ll be in touch soon.' : 'Something went wrong — please try again.';
+    msg.style.color = ok ? 'green' : 'red';
+    if (ok) e.target.reset();
+  } catch {
+    msg.textContent = 'Something went wrong — please try again.';
+    msg.style.color = 'red';
+  }
 });

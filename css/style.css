@@ -148,6 +148,17 @@ a  { color: inherit; text-decoration: none; }
 }
 .nav__links a:hover { color: var(--gold); }
 
+.nav__avatar-link {
+  color: var(--gold) !important;
+  border: 1px solid rgba(244,168,41,0.35);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius);
+}
+.nav__avatar-link:hover {
+  background: rgba(244,168,41,0.1);
+  color: var(--gold-light) !important;
+}
+
 .nav__hamburger {
   display: none;
   flex-direction: column;

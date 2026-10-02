@@ -10,6 +10,7 @@ COPY privacy.html /usr/share/nginx/html/
 COPY css/ /usr/share/nginx/html/css/
 COPY js/ /usr/share/nginx/html/js/
 COPY blog/ /usr/share/nginx/html/blog/
+COPY mastery/ /usr/share/nginx/html/mastery/
 # Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
